@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import SigninBgImage from "../../assets/singin-bg.png"; // Replace with your actual image later
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
-  // Form state
-  const [formData, setFormData] = useState({
+  // localStorage.clear();
+  const { auth, setAuth } = useAuth();
+
+  const initialState = {
     username: "",
     contact: "",
     address: "",
     email: "",
     password: "",
-    confirmPassword: "",
     rememberMe: false,
-  });
+  };
+
+  const [formData, setFormData] = useState(initialState);
+  const navigate = useNavigate();
 
   // Handle input change
   const handleChange = (e) => {
@@ -25,7 +31,9 @@ const SignUp = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    setAuth(formData);
+    setFormData(initialState);
+    navigate("/login");
   };
 
   return (
@@ -40,7 +48,7 @@ const SignUp = () => {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black opacity-60"></div>
 
-      <div className="relative w-full max-w-md p-6 bg-[#ffffff8a] rounded-lg shadow-md z-10">
+      <div className="relative w-full max-w-md p-6 bg-[#ffffff] rounded-lg shadow-md z-10">
         <h2 className="text-2xl font-bold text-center mb-3">Sign Up</h2>
         <p className="mb-1 text-center text-sm text-gray-400">
           Please Enter Your Personal Data
@@ -107,24 +115,11 @@ const SignUp = () => {
               type="password"
               name="password"
               required
+              minLength={8}
               value={formData.password}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
-            />
-          </div>
-
-          {/* Confirm Password */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              required
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Confirm your password"
             />
           </div>
 
@@ -157,9 +152,9 @@ const SignUp = () => {
         {/* Already have an account */}
         <p className="text-center text-gray-700 mt-6">
           Have an account?{" "}
-          <a href="#" className="text-blue-500 hover:underline">
-            Sign in
-          </a>
+          <Link to="/login" className="text-blue-500 hover:underline">
+            Login
+          </Link>
         </p>
       </div>
     </div>

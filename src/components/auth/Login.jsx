@@ -1,13 +1,31 @@
 import React, { useState } from "react";
 import LoginBgImage from "../../assets/singin-bg.png"; // Replace with your actual image later
+import { Link, useNavigate } from "react-router-dom";
+
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   // Form state
-  const [formData, setFormData] = useState({
+  const initialState = {
     email: "",
     password: "",
     rememberMe: false,
-  });
+  };
+  const [formData, setFormData] = useState(initialState);
+  const { auth, setAuth } = useAuth();
+  const toastValue = {
+    position: "top-right",
+    autoClose: 2000, // Time in milliseconds (3000ms = 3 seconds)
+    hideProgressBar: true, // Hides the progress bar
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined, // Hides the progress bar
+  };
+  console.log(auth);
+  const navigate = useNavigate();
 
   // Handle input change
   const handleChange = (e) => {
@@ -21,7 +39,17 @@ const Login = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    if (auth.email === formData.email) {
+      if (auth.password === formData.password) {
+        console.log("true");
+        navigate("/");
+        toast.success("Successfully Loged in",toastValue);
+      } else {
+        toast.error("Invalid Password !", toastValue);
+      }
+    } else {
+      toast.error("Invalid Email Address !",toastValue );
+    }
   };
 
   return (
@@ -99,9 +127,9 @@ const Login = () => {
         {/* Don't have an account */}
         <p className="text-center text-gray-700 mt-6">
           Don&apos;t have an account?{" "}
-          <a href="#" className="text-blue-500 hover:underline">
+          <Link to="/signup" className="text-blue-500 hover:underline">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
