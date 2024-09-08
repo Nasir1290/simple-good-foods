@@ -88,7 +88,7 @@ const FoodList = () => {
       {/* Scrollable Grid */}
       <div
         ref={scrollRef}
-        className="grid grid-flow-row md:grid-flow-col overflow-x-scroll gap-4 scroll-smooth"
+        className="grid grid-flow-row justify-center md:justify-start md:grid-flow-col overflow-x-scroll gap-4 scroll-smooth"
       >
         <FoodCard />
         <FoodCard />
