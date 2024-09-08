@@ -1,7 +1,7 @@
 import React from "react";
 
-import HeroImage from "../assets/herosideimage.png";
-import HeroBgImage from "../assets/herobg.png";
+import HeroImage from "../../assets/herosideimage.png";
+import HeroBgImage from "../../assets/herobg.png";
 import { MdOutlineArrowOutward } from "react-icons/md";
 
 const HeroSection = () => {

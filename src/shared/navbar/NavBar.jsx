@@ -25,7 +25,7 @@ export default function NavbarPage() {
 
   return (
     <Navbar
-      className="shadow py-2"
+      className=" shadow py-2"
       onMenuOpenChange={setIsMenuOpen}
       shouldHideOnScroll
     >
@@ -56,18 +56,20 @@ export default function NavbarPage() {
 
         {/* signup login and logout button */}
 
-        <button className="px-2 pt-1 pb-2 bg-[#6ea963] text-white text-small rounded-md text-center">
+        {/* <button className="px-2 pt-1 pb-2 bg-[#6ea963] text-white text-small rounded-md text-center">
           Login
-        </button>
+        </button> */}
 
-        <button className="px-2 pt-1 pb-2 text-[#6ea963] border-1 text-small border-[#6ea963] rounded-md text-center">
+        {/* <button className="px-2 pt-1 pb-2 text-[#6ea963] border-1 text-small border-[#6ea963] rounded-md text-center">
           Signup
-        </button>
+        </button> */}
 
         {/* logout button */}
+
         <button className=" font-bold text-2xl bg-red-400 text-white px-2 py-1 rounded-md">
           <IoIosLogOut />
         </button>
+
 
         {/* Avatar Dropdown added here */}
         <Dropdown placement="bottom-end">
