@@ -6,6 +6,8 @@ import WhySimpleGoodFood from "../components/home/WhySimpleGoodFood";
 import TrendingFoods from "../components/food/TrendingFoods";
 import SubHeroSection from "../components/home/SubHeroSection";
 import Faq from "../components/home/Faq";
+import FeedbackList from "../components/feedback/FeedbackList";
+import Footer from "../shared/footer/Footer";
 
 const HomePage = () => {
   return (
@@ -17,6 +19,8 @@ const HomePage = () => {
       <TrendingFoods />
       <SubHeroSection />
       <Faq/>
+      <FeedbackList/>
+      <Footer/>
     </div>
   );
 };

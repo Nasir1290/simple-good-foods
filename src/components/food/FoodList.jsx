@@ -77,6 +77,7 @@ const FoodList = () => {
 
   return (
     <div className="relative mx-4 md:mx-20">
+      <h1 className=" text-4xl font-bold mt-12 text-center">Trending Foods</h1>
       {/* Left Arrow (hidden on small screens) */}
       <button
         className="hidden md:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-300 rounded-full p-2 hover:bg-gray-500"
@@ -90,10 +91,6 @@ const FoodList = () => {
         ref={scrollRef}
         className="grid grid-flow-row justify-center md:justify-start md:grid-flow-col overflow-x-scroll gap-4 scroll-smooth"
       >
-        <FoodCard />
-        <FoodCard />
-        <FoodCard />
-        <FoodCard />
         <FoodCard />
         <FoodCard />
         <FoodCard />
