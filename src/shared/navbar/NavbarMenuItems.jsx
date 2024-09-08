@@ -28,6 +28,12 @@ const NavbarMenuItems = () => {
       <Link color="foreground" className="w-full" size="lg">
         FAQ
       </Link>
+      <Link color="foreground" className="w-full" size="lg">
+        FAQ
+      </Link>
+      <Link color="foreground" className="w-full" size="lg">
+        FAQ
+      </Link>
     </NavbarMenuItem>
   );
 }

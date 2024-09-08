@@ -18,6 +18,7 @@ import LogoImage from "../../assets/logo.png";
 import NavItem from "./NavItem.jsx";
 import NavbarMenuItems from "./NavbarMenuItems.jsx";
 import { TiShoppingCart } from "react-icons/ti";
+import { IoIosLogOut } from "react-icons/io";
 
 export default function NavbarPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +37,7 @@ export default function NavbarPage() {
         {/* company logo */}
         <NavbarBrand>
           <Image
-            className=" w-12 h-12 md:w-16 md:h-16 rounded-full cursor-pointer"
+            className=" w-8 h-8 md:w-16 md:h-16 rounded-full cursor-pointer"
             src={LogoImage}
           />
         </NavbarBrand>
@@ -50,23 +51,36 @@ export default function NavbarPage() {
         {/* navigation items menu */}
       </NavbarContent>
 
-      <NavbarContent justify="end" className="items-center">
+      <NavbarContent justify="end" className=" items-center">
         {/* Search Input added here */}
 
-        {/* add a cart icon for add to cart */}
+        {/* signup login and logout button */}
 
-        {/* user menus like logout card and many thing to added here */}
+        <button className="px-2 pt-1 pb-2 bg-[#6ea963] text-white text-small rounded-md text-center">
+          Login
+        </button>
+
+        <button className="px-2 pt-1 pb-2 text-[#6ea963] border-1 text-small border-[#6ea963] rounded-md text-center">
+          Signup
+        </button>
+
+        {/* logout button */}
+        <button className=" font-bold text-2xl bg-red-400 text-white px-2 py-1 rounded-md">
+          <IoIosLogOut />
+        </button>
+
         {/* Avatar Dropdown added here */}
         <Dropdown placement="bottom-end">
+          {/* avatar */}
           <DropdownTrigger>
             <Avatar
               isBordered
               as="button"
-              className="transition-transform"
+              className="transition-transform h-8 rounded-full"
               color="secondary"
               name="Jason Hughes"
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src=""
             />
           </DropdownTrigger>
           {/* user profile dropdown */}
@@ -75,15 +89,12 @@ export default function NavbarPage() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">zoey@example.com</p>
             </DropdownItem>
-            <DropdownItem key="logout" color="danger">
-              Log Out
-            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
 
         {/* shoping cart */}
-        <div className=" border-2 border-blue-500 h-10 w-10 rounded-full text-indigo-400 font-bold flex items-center justify-center">
-          < TiShoppingCart  className="font-bold h-6 w-6"/>
+        <div className=" border-2 border-blue-500 h-9 w-9 rounded-full text-indigo-400 font-bold flex items-center justify-center">
+          <TiShoppingCart className="font-bold h-6 w-6" />
         </div>
       </NavbarContent>
 
