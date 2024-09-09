@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import FoodCard from "./FoodCard";
-import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 import allFoods from "../../data/foodData";
 
-const TrendingFoods = () => {
+const RelatedFood = ({category}) => {
   const scrollRef = useRef(null);
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -16,7 +16,7 @@ const TrendingFoods = () => {
     }
   };
 
-  const trendingFoods = allFoods.filter((food) => food.rating > 4.6);
+  const relatedFood = allFoods.filter((food) => food.category === category);
   return (
     <div className="relative mx-4 md:mx-20">
       <h1 className=" text-4xl font-bold mt-12 text-center">Trending Foods</h1>
@@ -33,7 +33,7 @@ const TrendingFoods = () => {
         ref={scrollRef}
         className="grid grid-flow-row justify-center md:justify-start md:grid-flow-col overflow-x-scroll gap-4 scroll-smooth"
       >
-        {trendingFoods.map((foodItem, index) => (
+        {relatedFood.map((foodItem, index) => (
           <FoodCard foodItem={foodItem} key={index} />
         ))}
       </div>
@@ -49,4 +49,4 @@ const TrendingFoods = () => {
   );
 };
 
-export default TrendingFoods;
+export default RelatedFood;

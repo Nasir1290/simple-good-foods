@@ -1,111 +1,46 @@
-// import React, { useRef } from "react";
-// import FoodCard from "./FoodCard";
-// import { IoIosArrowDropright,IoIosArrowDropleft } from "react-icons/io";
-
-// const FoodList = () => {
-//   const scrollRef = useRef(null); // Ref for the scrollable div
-
-//   const scroll = (direction) => {
-//     if (scrollRef.current) {
-//       const { scrollLeft, clientWidth } = scrollRef.current;
-//       const scrollTo =
-//         direction === "left"
-//           ? scrollLeft - clientWidth
-//           : scrollLeft + clientWidth;
-//       scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
-//     }
-//   };
-
-//   return (
-//     <div className="relative mx-20">
-//       {/* Left Arrow */}
-//       <button
-//         className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-300 rounded-full p-2 hover:bg-gray-500"
-//         onClick={() => scroll("left")}
-//       >
-//         <IoIosArrowDropleft className="" size={20} />
-//       </button>
-
-//       {/* Scrollable Grid */}
-//       <div
-//         ref={scrollRef}
-//         className="grid grid-flow-row md:grid-flow-col overflow-x-scroll gap-4 scroll-smooth"
-//       >
-//         <FoodCard />
-//         <FoodCard />
-//         <FoodCard />
-//         <FoodCard />
-//         <FoodCard />
-//         <FoodCard />
-//         <FoodCard />
-//         <FoodCard />
-//       </div>
-
-//       {/* Right Arrow */}
-//       <button
-//         className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-300 rounded-full p-2 hover:bg-gray-500"
-//         onClick={() => scroll("right")}
-//       >
-//         <IoIosArrowDropright size={20} />{" "}
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default FoodList;
-
-
-
-
-import React, { useRef } from "react";
+import React, { useState } from "react";
+import Paginate from "../general/Pagination";
+import NotFound from "../general/NotFound";
 import FoodCard from "./FoodCard";
-import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 
-const FoodList = () => {
-  const scrollRef = useRef(null); // Ref for the scrollable div
+function FoodList({ products }) {
+  // paginate logic
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const paginatedProducts = products.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo =
-        direction === "left"
-          ? scrollLeft - clientWidth
-          : scrollLeft + clientWidth;
-      scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
-    }
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
+  // paginate logic
+
   return (
-    <div className="relative mx-4 md:mx-20">
-      <h1 className=" text-4xl font-bold mt-12 text-center">Trending Foods</h1>
-      {/* Left Arrow (hidden on small screens) */}
-      <button
-        className="hidden md:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-300 rounded-full p-2 hover:bg-gray-500"
-        onClick={() => scroll("left")}
-      >
-        <IoIosArrowDropleft size={24} />
-      </button>
-
-      {/* Scrollable Grid */}
-      <div
-        ref={scrollRef}
-        className="grid grid-flow-row justify-center md:justify-start md:grid-flow-col overflow-x-scroll gap-4 scroll-smooth"
-      >
-        <FoodCard />
-        <FoodCard />
-        <FoodCard />
-        <FoodCard />
-      </div>
-
-      {/* Right Arrow (hidden on small screens) */}
-      <button
-        className="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gray-300 rounded-full p-2 hover:bg-gray-500"
-        onClick={() => scroll("right")}
-      >
-        <IoIosArrowDropright size={24} />
-      </button>
-    </div>
+    <>
+      {paginatedProducts?.length > 1 ? (
+        // <div className="grid items-center justify-items-center md:grid-cols-3 lg:grid-cols-3 grid-cols-1 mx-8 gap-3">
+        
+          <div className="flex flex-wrap justify-center items-center gap-3 mx-8">
+            {paginatedProducts.map((foodItem, index) => (
+              <FoodCard key={index} foodItem={foodItem} />
+            ))}
+          </div>
+      ) : (
+        <NotFound />
+      )}
+      {products.length > 12 && (
+        <Paginate
+          total={totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
+    </>
   );
-};
+}
 
 export default FoodList;

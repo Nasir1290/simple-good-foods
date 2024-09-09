@@ -12,15 +12,12 @@ import Footer from "../shared/footer/Footer";
 const HomePage = () => {
   return (
     <div>
-      <TopNavbar />
-      <NavBar />
       <HeroSection />
       <WhySimpleGoodFood />
       <TrendingFoods />
       <SubHeroSection />
       <Faq/>
       <FeedbackList/>
-      <Footer/>
     </div>
   );
 };
