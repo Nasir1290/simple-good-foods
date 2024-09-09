@@ -19,6 +19,7 @@ const routes = Router([
   {
     path: "/",
     element: <App />,
+    errorElement:<NotFound/>,
     children: [
       {
         index: true,

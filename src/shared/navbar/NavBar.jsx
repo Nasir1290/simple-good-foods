@@ -20,22 +20,30 @@ import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../components/firebase/firebaseConfig.js";
 import Loading from "../../components/general/Loading.jsx";
 import useCart from "../../hooks/useCart.js";
+import { toast } from "react-toastify";
 
 export default function NavbarPage() {
   const { user, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstLetter = user?.displayName.charAt(0);
-  const navigate = useNavigate();
   const auth = getAuth(app);
   const { cartData, setCartData, addToCart, removeFromCart } = useCart();
 
+  const toastValue = {
+    position: "top-right",
+    autoClose: 1800,
+    hideProgressBar: true,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined,
+  };
   const handleLogoutClick = async (event) => {
     event.preventDefault();
 
     try {
       // Perform Firebase signOut
       await signOut(auth);
-      
+      toast.warn("Logged out successfully", toastValue);
     } catch (error) {
       console.error("Error during logout:", error);
     }
