@@ -7,6 +7,10 @@ import NotFound from "../components/general/NotFound";
 import OurMenus from "../pages/OurMenus";
 import FoodDetail from "../components/food/FoodDetails";
 import MealPlans from "../pages/MealPlans";
+import CateringPage from "../pages/CateringPage";
+import HowItWorks from "../pages/HowItWorks";
+import Testimonials from "../pages/Testimonials";
+import Faq from "../components/home/Faq";
 
 const routes = Router([
   {
@@ -28,6 +32,22 @@ const routes = Router([
       {
         path: "/food-details/:id",
         element: <FoodDetail />,
+      },
+      {
+        path: "/catering",
+        element: <CateringPage />,
+      },
+      {
+        path: "/howitwork",
+        element: <HowItWorks />,
+      },
+      {
+        path: "/testimonial",
+        element: <Testimonials />,
+      },
+      {
+        path: "/faq",
+        element: <Faq />,
       },
     ],
   },
