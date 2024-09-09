@@ -1,9 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 const FoodCard = ({ foodItem }) => {
+  const {user,loading} = useAuth();
+  const navigate = useNavigate();
   const toastValue = {
     position: "top-right",
     autoClose: 2000,
@@ -17,6 +20,11 @@ const FoodCard = ({ foodItem }) => {
 
   const handleAddToCart = (event) => {
     event.preventDefault();
+    if(!user?.email) {
+      navigate("/login")
+      toast.warning("login first",toastValue)
+      return
+    }
     const isProductInCart = cartData.some((item) => item.id === foodItem.id);
     if (isProductInCart) {
       toast.error("Product already in cart!", toastValue);

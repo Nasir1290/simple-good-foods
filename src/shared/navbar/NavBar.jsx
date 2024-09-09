@@ -35,11 +35,9 @@ export default function NavbarPage() {
     try {
       // Perform Firebase signOut
       await signOut(auth);
-      // After signOut, navigate to the login page
-      // navigate("/login");
+      
     } catch (error) {
       console.error("Error during logout:", error);
-      // Optionally, you can add an error toast message here
     }
   };
 

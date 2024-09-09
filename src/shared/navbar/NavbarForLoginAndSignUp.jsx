@@ -14,32 +14,10 @@ import NavItem from "./NavItem.jsx";
 import NavbarMenuItems from "./NavbarMenuItems.jsx";
 import { TiShoppingCart } from "react-icons/ti";
 import { IoIosLogOut } from "react-icons/io";
-import useAuth from "../../hooks/useAuth.js";
-import { Link, useNavigate } from "react-router-dom";
-import { getAuth, signOut } from "firebase/auth";
-import { app } from "../../components/firebase/firebaseConfig.js";
+import { Link } from "react-router-dom";
 
-export default function NavbarPage() {
-  const { user } = useAuth();
-  console.log("from nav", user);
+export default function NavbarForLoginAndSignup() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const firstLetter = user?.displayName.charAt(0);
-  const navigate = useNavigate();
-  const auth = getAuth(app);
-
-  const handleLogoutClick = async (event) => {
-    event.preventDefault();
-
-    try {
-      // Perform Firebase signOut
-      await signOut(auth);
-      // After signOut, navigate to the login page
-      navigate("/login");
-    } catch (error) {
-      console.error("Error during logout:", error);
-      // Optionally, you can add an error toast message here
-    }
-  };
 
   return (
     <Navbar
@@ -47,14 +25,34 @@ export default function NavbarPage() {
       onMenuOpenChange={setIsMenuOpen}
       shouldHideOnScroll
     >
-      <NavbarContent justify="end" className=" items-center">
-        <Link to="/cart-details">
-          <div className=" border-2 cursor-pointer border-blue-500 h-9 w-9 rounded-full text-indigo-400 font-bold flex items-center justify-center">
-            <TiShoppingCart className="font-bold h-6 w-6" />
-          </div>
-        </Link>
+      <NavbarContent justify="start">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        {/* company logo */}
+        <NavbarBrand>
+          <Link to="/">
+            <Image
+              className=" w-12 h-12 md:w-20 md:h-20 rounded-full cursor-pointer"
+              src={LogoImage}
+            />
+          </Link>
+        </NavbarBrand>
+
+        {/* <h4 className=" mx-2 font-bold">Shop</h4> */}
       </NavbarContent>
 
+      <NavbarContent className="hidden sm:flex gap-12" justify="center">
+        {/* navigation items menu */}
+        <NavItem />
+        {/* navigation items menu */}
+      </NavbarContent>
+
+      {/* Menu item for mobile user */}
+      <NavbarMenu>
+        <NavbarMenuItems />
+      </NavbarMenu>
     </Navbar>
   );
 }

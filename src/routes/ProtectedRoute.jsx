@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
+import Loading from "../components/general/Loading";
 
 const ProtectedRoute = ({ element }) => {
   const toastValue = {
@@ -17,11 +18,11 @@ const ProtectedRoute = ({ element }) => {
   const { user, loading } = useAuth(); // Access user and loading from useAuth
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (!user) {
-    toast.error("Please Login First!", toastValue);
+    toast.warning("Please Login First!", toastValue);
     return <Navigate to="/login" replace />;
   }
 
@@ -29,6 +30,9 @@ const ProtectedRoute = ({ element }) => {
 };
 
 export default ProtectedRoute;
+
+
+
 
 // protected routes
 //  {
