@@ -16,17 +16,29 @@ import { TiShoppingCart } from "react-icons/ti";
 import { IoIosLogOut } from "react-icons/io";
 import useAuth from "../../hooks/useAuth.js";
 import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
+import { app } from "../../components/firebase/firebaseConfig.js";
 
 export default function NavbarPage() {
+  const {user}  = useAuth();
+  console.log("from nav",user)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { auth, setAuth } = useAuth();
-  const firstLetter = auth?.username?.charAt(0);
+  const firstLetter = user?.displayName.charAt(0);
   const navigate = useNavigate();
+  const auth = getAuth(app);
 
-  const handleLogoutClick = (event) => {
+  const handleLogoutClick = async (event) => {
     event.preventDefault();
-    setAuth({});
-    navigate("/login");
+
+    try {
+      // Perform Firebase signOut
+      await signOut(auth);
+      // After signOut, navigate to the login page
+      navigate("/login");
+    } catch (error) {
+      console.error("Error during logout:", error);
+      // Optionally, you can add an error toast message here
+    }
   };
 
   return (
@@ -62,7 +74,7 @@ export default function NavbarPage() {
       <NavbarContent justify="end" className=" items-center">
         {/* Search Input added here */}
 
-        {auth?.email ? (
+        {user?.email ? (
           <>
             {/* logout button */}
             <button
@@ -73,14 +85,15 @@ export default function NavbarPage() {
             </button>
 
             {/* Avatar Dropdown added here */}
-            <Link to="/user-profile"
-            className=" border-3 border-blue-600 rounded-full"
+            <Link
+              to="/user-profile"
+              className=" border-3 border-blue-600 rounded-full"
             >
-              {auth?.userImage ? (
+              {user?.photoURL ? (
                 <img
                   className="h-8 w-8 rounded-full object-cover overflow-hidden"
-                  src={auth?.userImage}
-                  alt={auth.username}
+                  src={user?.photoURL}
+                  alt={user?.displayName}
                 />
               ) : (
                 <div className="flex items-center justify-center bg-gray-400 h-8 w-8 rounded-full text-white text-xl font-semibold uppercase">

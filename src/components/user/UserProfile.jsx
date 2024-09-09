@@ -3,11 +3,11 @@ import { FaEdit } from "react-icons/fa"; // For the edit icon
 import useAuth from "../../hooks/useAuth";
 
 const UserProfile = () => {
-  const { auth, setAuth } = useAuth();
-  const firstLetter = auth?.username?.charAt(0);
-  console.log(auth)
+  const { user } = useAuth();
+  const firstLetter = user?.displayName.charAt(0);
+  console.log(user)
 
-  const user = {
+  const dummyuser = {
     name: "John Doe",
     email: "john.doe@example.com",
     contact: "123-456-7890",
@@ -44,23 +44,23 @@ const UserProfile = () => {
           <input
             type="text"
             className="w-full border border-gray-300 p-2 rounded"
-            defaultValue={auth?.username}
+            defaultValue={user?.displayName}
           />
         </div>
-        <div>
+        {/* <div>
           <label className="block mb-1">Email</label>
           <input
             type="email"
             className="w-full border border-gray-300 p-2 rounded"
-            defaultValue={auth?.email}
+            defaultValue={user?.email}
           />
-        </div>
+        </div> */}
         <div>
           <label className="block mb-1">Contact No.</label>
           <input
             type="text"
             className="w-full border border-gray-300 p-2 rounded"
-            defaultValue={auth?.contact}
+            defaultValue={user?.contact}
           />
         </div>
         <div>
@@ -68,7 +68,7 @@ const UserProfile = () => {
           <input
             type="text"
             className="w-full border border-gray-300 p-2 rounded"
-            defaultValue={auth?.address}
+            defaultValue={user?.address}
           />
         </div>
         <button className="bg-blue-500 text-white p-2 rounded mt-2">
@@ -127,7 +127,7 @@ const UserProfile = () => {
             </tr>
           </thead>
           <tbody>
-            {user.orders.map((order, index) => (
+            {dummyuser.orders.map((order, index) => (
               <tr key={index} className="bg-white border-b hover:bg-gray-50">
                 <td className="px-4 py-2">{order.meal}</td>
                 <td className="px-4 py-2">{order.orderDate}</td>
@@ -158,11 +158,11 @@ const UserProfile = () => {
       <div className="flex flex-col items-center justify-center gap-4">
         {/* User Image with Edit Icon */}
         <div className="relative">
-          {auth?.userImage ? (
+          {user?.photoURL ? (
             <img
               className="h-32 w-32 md:h-52 md:w-52 rounded-full object-cover overflow-hidden"
-              src={auth?.userImage}
-              alt={user.name}
+              src={user?.photoURL}
+              alt={user?.displayName}
             />
           ) : (
             <div className="flex items-center justify-center bg-gray-400 h-32 w-32 md:h-48 md:w-48 rounded-full text-white text-4xl font-semibold uppercase">
@@ -176,8 +176,8 @@ const UserProfile = () => {
         </div>
         {/* User Name and Email */}
         <div className="text-center">
-          <h1 className="text-2xl font-semibold">{auth?.username}</h1>
-          <p className="text-gray-600">{auth?.email}</p>
+          <h1 className="text-2xl font-semibold">{user?.displayName}</h1>
+          <p className="text-gray-600">{user?.email}</p>
         </div>
       </div>
 

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import SigninBgImage from "../../assets/singin-bg.png"; // Replace with your actual image later
+import SigninBgImage from "../../assets/singin-bg.png"; // Replace with your actual image
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
-  // localStorage.clear();
-  const { auth, setAuth } = useAuth();
+  const { createUser, signInWithGoogle, updateUserProfile } = useAuth();
 
   const initialState = {
     username: "",
@@ -14,10 +14,18 @@ const SignUp = () => {
     email: "",
     password: "",
     rememberMe: false,
-    profileImage:"",
+    profileImage: "",
+  };
+  const toastValue = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
   };
 
-  
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
 
@@ -31,11 +39,37 @@ const SignUp = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setAuth(formData);
-    setFormData(initialState);
-    navigate("/login");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Create user with email and password
+      const result = await createUser(formData.email, formData.password);
+      console.log("signup",result);
+      // Update user profile with username and profile image
+      await updateUserProfile(
+        formData.username,
+        formData.profileImage,
+        formData.address,
+        formData.contact
+      );
+
+      navigate("/");
+      toast.success("Sign Up Successfully", toastValue);
+    } catch (err) {
+      toast.error(err?.message,toastValue);
+    }
+  };
+
+  // Handle Google SignIn
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      navigate("/");
+      toast.success("Signed in with Google successfully",toastValue);
+    } catch (err) {
+      toast.error(err?.message);
+    }
   };
 
   return (
@@ -50,7 +84,7 @@ const SignUp = () => {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black opacity-60"></div>
 
-      <div className="relative w-full max-w-md p-6 bg-[#ffffff] rounded-lg shadow-md z-10">
+      <div className="relative w-full max-w-md p-6 bg-white rounded-lg shadow-md z-10">
         <h2 className="text-2xl font-bold text-center mb-3">Sign Up</h2>
         <p className="mb-1 text-center text-sm text-gray-400">
           Please Enter Your Personal Data
@@ -150,6 +184,14 @@ const SignUp = () => {
             Sign Up
           </button>
         </form>
+
+        {/* Google SignIn Button */}
+        <button
+          onClick={handleGoogleSignIn}
+          className="w-full mt-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+        >
+          Sign Up with Google
+        </button>
 
         {/* Already have an account */}
         <p className="text-center text-gray-700 mt-6">

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import LoginBgImage from "../../assets/singin-bg.png"; // Replace with your actual image later
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,19 +13,9 @@ const Login = () => {
     rememberMe: false,
   };
   const [formData, setFormData] = useState(initialState);
-  const { auth, setAuth } = useAuth();
-  const toastValue = {
-    position: "top-right",
-    autoClose: 2000, // Time in milliseconds (3000ms = 3 seconds)
-    hideProgressBar: true, // Hides the progress bar
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined, // Hides the progress bar
-  };
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [error, setError] = useState(""); // Error state
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -35,19 +24,54 @@ const Login = () => {
     });
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (auth.email === formData.email) {
-      if (auth.password === formData.password) {
-        console.log("true");
-        navigate("/");
-        toast.success("Successfully Loged in",toastValue);
-      } else {
-        toast.error("Invalid Password !", toastValue);
-      }
-    } else {
-      toast.error("Invalid Email Address !",toastValue );
+  const toastValue = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
+
+  const { signIn, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+
+  // Form submit handler
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    try {
+      // User login
+      const result = await signIn(formData.email, formData.password);
+      console.log("login with credential",result);
+
+      // Navigate user to the intended route
+      navigate(from, { replace: true });
+      toast.success("Login Successfully", toastValue);
+    } catch (err) {
+      setError(err?.message || "An error occurred");
+      toast.error(err?.message || "Login failed", toastValue);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Google sign-in handler
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      console.log("ogin with google", result);
+
+      // Navigate user to the intended route
+      navigate(from, { replace: true });
+      toast.success("Login Successfully", toastValue);
+    } catch (err) {
+      toast.error(err?.message || "Google Sign-in failed", toastValue);
     }
   };
 
@@ -68,33 +92,56 @@ const Login = () => {
         <p className="mb-1 text-center text-sm text-gray-400">
           Welcome Back! Please Log In.
         </p>
+
         <form onSubmit={handleSubmit}>
           {/* Email */}
           <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-gray-700">
+              Email
+            </label>
             <input
+              id="email"
               type="email"
               name="email"
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-3 py-2 border ${
+                error ? "border-red-500" : "border-gray-300"
+              } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder="Enter your email"
+              aria-label="Email"
             />
+            {error && (
+              <p className="text-red-500 text-sm mt-1">
+                {error.includes("email") && error}
+              </p>
+            )}
           </div>
 
           {/* Password */}
           <div className="mb-4">
-            <label className="block text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-gray-700">
+              Password
+            </label>
             <input
+              id="password"
               type="password"
               name="password"
               required
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-3 py-2 border ${
+                error ? "border-red-500" : "border-gray-300"
+              } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder="Enter your password"
+              aria-label="Password"
             />
+            {error && (
+              <p className="text-red-500 text-sm mt-1">
+                {error.includes("password") && error}
+              </p>
+            )}
           </div>
 
           {/* Remember me and Forgot password */}
@@ -107,19 +154,25 @@ const Login = () => {
                 onChange={handleChange}
                 className="mr-2"
               />
-              <label className="text-gray-700">Remember me</label>
+              <label htmlFor="rememberMe" className="text-gray-700">
+                Remember me
+              </label>
             </div>
-            <a href="#" className="text-sm text-blue-500 hover:underline">
+            <Link
+              to="/forgot-password"
+              className="text-sm text-blue-500 hover:underline"
+            >
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           {/* Login Button */}
           <button
             type="submit"
             className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
 
@@ -130,6 +183,17 @@ const Login = () => {
             Sign up
           </Link>
         </p>
+
+        {/* Google Login */}
+        <div className="mt-4 flex justify-center">
+          <button
+            onClick={handleGoogleSignIn}
+            className="py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            disabled={isLoading}
+          >
+            {isLoading ? "Please wait..." : "Login with Google"}
+          </button>
+        </div>
       </div>
     </div>
   );

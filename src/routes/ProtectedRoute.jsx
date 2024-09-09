@@ -11,3 +11,10 @@ const ProtectedRoute = ({ element }) => {
 };
 
 export default ProtectedRoute;
+
+
+// protected routes 
+    //  {
+    //     path: "/dashboard",
+    //     element: <ProtectedRoute element={<Dashboard />} />, // Protected route
+    //   },
