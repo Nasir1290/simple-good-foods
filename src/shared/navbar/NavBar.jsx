@@ -18,14 +18,16 @@ import useAuth from "../../hooks/useAuth.js";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../components/firebase/firebaseConfig.js";
+import Loading from "../../components/general/Loading.jsx";
+import useCart from "../../hooks/useCart.js";
 
 export default function NavbarPage() {
-  const {user}  = useAuth();
-  console.log("from nav",user)
+  const { user, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstLetter = user?.displayName.charAt(0);
   const navigate = useNavigate();
   const auth = getAuth(app);
+  const { cartData, setCartData, addToCart, removeFromCart } = useCart();
 
   const handleLogoutClick = async (event) => {
     event.preventDefault();
@@ -40,6 +42,10 @@ export default function NavbarPage() {
       // Optionally, you can add an error toast message here
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Navbar
@@ -118,9 +124,16 @@ export default function NavbarPage() {
           </>
         )}
         {/* shoping cart */}
-        <div className=" border-2 border-blue-500 h-9 w-9 rounded-full text-indigo-400 font-bold flex items-center justify-center">
-          <TiShoppingCart className="font-bold h-6 w-6" />
-        </div>
+        <Link to="/cart-details">
+          <div className="relative border-2 cursor-pointer border-blue-500 h-9 w-9 rounded-full text-indigo-400 font-bold flex items-center justify-center">
+            <TiShoppingCart className="font-bold h-6 w-6" />
+            {cartData.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cartData.length}
+              </span>
+            )}
+          </div>
+        </Link>
       </NavbarContent>
 
       {/* Menu item for mobile user */}

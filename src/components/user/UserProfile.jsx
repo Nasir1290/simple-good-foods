@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa"; // For the edit icon
 import useAuth from "../../hooks/useAuth";
+import Loading from "../general/Loading";
 
 const UserProfile = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const firstLetter = user?.displayName.charAt(0);
-  console.log(user)
+  console.log(user);
 
   const dummyuser = {
     name: "John Doe",
@@ -47,14 +48,6 @@ const UserProfile = () => {
             defaultValue={user?.displayName}
           />
         </div>
-        {/* <div>
-          <label className="block mb-1">Email</label>
-          <input
-            type="email"
-            className="w-full border border-gray-300 p-2 rounded"
-            defaultValue={user?.email}
-          />
-        </div> */}
         <div>
           <label className="block mb-1">Contact No.</label>
           <input
@@ -152,6 +145,10 @@ const UserProfile = () => {
     </div>
   );
 
+  if (loading) {
+    return <Loading/>;
+  }
+
   return (
     <div className="max-w-5xl mx-auto p-4">
       {/* User Info Section */}
@@ -160,7 +157,7 @@ const UserProfile = () => {
         <div className="relative">
           {user?.photoURL ? (
             <img
-              className="h-32 w-32 md:h-52 md:w-52 rounded-full object-cover overflow-hidden"
+              className="h-32 w-32 md:h-52 md:w-52 rounded-full border-3 object-cover overflow-hidden"
               src={user?.photoURL}
               alt={user?.displayName}
             />

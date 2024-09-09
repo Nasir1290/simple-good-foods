@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import allFoods from "../../data/foodData";
 import RelatedFood from "./RelatedFood";
+import Loading from "../general/Loading";
+import useAuth from "../../hooks/useAuth";
 
 function FoodDetail() {
+  const {user,loading} = useAuth();
   const { id } = useParams();
   const [foodItem, setFoodItem] = useState(null);
 
@@ -14,8 +17,8 @@ function FoodDetail() {
     setFoodItem(particularFoodItem);
   }, [id]);
 
-  if (!foodItem) {
-    return <div>Loading...</div>; // Or a more sophisticated loading indicator
+  if (!foodItem || loading) {
+    return <Loading/> // Or a more sophisticated loading indicator
   }
 
   return (

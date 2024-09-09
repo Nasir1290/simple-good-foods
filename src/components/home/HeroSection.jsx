@@ -3,6 +3,7 @@ import React from "react";
 import HeroImage from "../../assets/herosideimage.png";
 import HeroBgImage from "../../assets/herobg.png";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -24,9 +25,11 @@ const HeroSection = () => {
           Order on Simply Good Food
         </div>
         <div>
-          <button className=" flex justify-center items-center gap-2 px-3 py-2 bg-[#fdb64e] md:mt-8 mt-4 rounded-lg">
-            Explore Menu <MdOutlineArrowOutward className=" inline" />{" "}
-          </button>
+          <Link to="/ourmenus">
+            <button className=" flex justify-center items-center gap-2 px-3 py-2 hover:bg-[#ffc772] bg-[#fdb64e] md:mt-8 mt-4 rounded-lg">
+              Explore Menu <MdOutlineArrowOutward className=" inline" />{" "}
+            </button>
+          </Link>
         </div>
       </div>
       {/* image content div */}

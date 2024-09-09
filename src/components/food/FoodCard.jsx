@@ -1,7 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useCart from "../../hooks/useCart";
+import { toast } from "react-toastify";
 
 const FoodCard = ({ foodItem }) => {
+  const toastValue = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
+  const { cartData, setCartData, addToCart, removeFromCart } = useCart();
+
+  const handleAddToCart = (event) => {
+    event.preventDefault();
+    const isProductInCart = cartData.some((item) => item.id === foodItem.id);
+    if (isProductInCart) {
+      toast.error("Product already in cart!", toastValue);
+    } else {
+      addToCart(foodItem);
+      toast.success("Added to cart successfully!", toastValue);
+    }
+  };
+  console.log(cartData);
+
   return (
     <div className="w-[354px] bg-[#f7f7f7] p-2 flex flex-col justify-center mt-4 rounded-md shadow-lg border">
       <div className="relative w-full cursor-pointer">
@@ -27,7 +52,10 @@ const FoodCard = ({ foodItem }) => {
             ${foodItem?.price}
           </div>
         </Link>
-        <button className="bg-[#6ea963] text-white py-2 text-center rounded-lg font-semibold mt-3">
+        <button
+          className="bg-[#6ea963] hover:bg-[#4fff30] transition-all text-white py-2 text-center rounded-lg font-semibold mt-3"
+          onClick={handleAddToCart}
+        >
           Add To Cart
         </button>
         <div className="flex justify-between items-center mx-4 text-small text-[#bf757b] mt-3">

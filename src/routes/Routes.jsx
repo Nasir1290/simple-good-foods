@@ -12,6 +12,8 @@ import HowItWorks from "../pages/HowItWorks";
 import Testimonials from "../pages/Testimonials";
 import Faq from "../components/home/Faq";
 import UserProfile from "../components/user/UserProfile";
+import CartDetails from "../pages/CartDetails";
+import ProtectedRoute from "./ProtectedRoute";
 
 const routes = Router([
   {
@@ -53,6 +55,10 @@ const routes = Router([
       {
         path: "/user-profile",
         element: <UserProfile />,
+      },
+      {
+        path: "/cart-details",
+        element: <ProtectedRoute element={<CartDetails/>} />,
       },
     ],
   },
