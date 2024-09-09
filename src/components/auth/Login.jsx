@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   // Form state
@@ -176,6 +177,18 @@ const Login = () => {
           </button>
         </form>
 
+        {/* Google Sign-In Button */}
+        <div className="flex flex-col items-center justify-center">
+          <h3 className="text-sm text-gray-500 mb-2">Or Log in with</h3>
+          <button
+            onClick={handleGoogleSignIn}
+            className="flex items-center py-2 px-6 bg-white text-gray-700 border border-gray-300 rounded-lg shadow-md hover:bg-gray-100 focus:outline-none transition duration-200"
+          >
+            <FcGoogle className="text-2xl mr-3" />
+            <span className="text-base font-medium">Log in with Google</span>
+          </button>
+        </div>
+
         {/* Don't have an account */}
         <p className="text-center text-gray-700 mt-6">
           Don&apos;t have an account?{" "}
@@ -183,17 +196,6 @@ const Login = () => {
             Sign up
           </Link>
         </p>
-
-        {/* Google Login */}
-        <div className="mt-4 flex justify-center">
-          <button
-            onClick={handleGoogleSignIn}
-            className="py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-600"
-            disabled={isLoading}
-          >
-            {isLoading ? "Please wait..." : "Login with Google"}
-          </button>
-        </div>
       </div>
     </div>
   );

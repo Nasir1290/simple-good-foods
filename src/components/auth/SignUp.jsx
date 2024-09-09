@@ -3,6 +3,7 @@ import SigninBgImage from "../../assets/singin-bg.png"; // Replace with your act
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
   const { createUser, signInWithGoogle, updateUserProfile } = useAuth();
@@ -45,7 +46,7 @@ const SignUp = () => {
     try {
       // Create user with email and password
       const result = await createUser(formData.email, formData.password);
-      console.log("signup",result);
+      console.log("signup", result);
       // Update user profile with username and profile image
       await updateUserProfile(
         formData.username,
@@ -57,7 +58,7 @@ const SignUp = () => {
       navigate("/");
       toast.success("Sign Up Successfully", toastValue);
     } catch (err) {
-      toast.error(err?.message,toastValue);
+      toast.error(err?.message, toastValue);
     }
   };
 
@@ -66,7 +67,7 @@ const SignUp = () => {
     try {
       const result = await signInWithGoogle();
       navigate("/");
-      toast.success("Signed in with Google successfully",toastValue);
+      toast.success("Signed in with Google successfully", toastValue);
     } catch (err) {
       toast.error(err?.message);
     }
@@ -185,13 +186,17 @@ const SignUp = () => {
           </button>
         </form>
 
-        {/* Google SignIn Button */}
-        <button
-          onClick={handleGoogleSignIn}
-          className="w-full mt-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-        >
-          Sign Up with Google
-        </button>
+        {/* Google Sign-In Button */}
+        <div className="flex flex-col items-center justify-center">
+          <h3 className="text-sm text-gray-500 mb-2">Or sign in with</h3>
+          <button
+            onClick={handleGoogleSignIn}
+            className="flex items-center py-2 px-6 bg-white text-gray-700 border border-gray-300 rounded-lg shadow-md hover:bg-gray-100 focus:outline-none transition duration-200"
+          >
+            <FcGoogle className="text-2xl mr-3" />
+            <span className="text-base font-medium">Sign in with Google</span>
+          </button>
+        </div>
 
         {/* Already have an account */}
         <p className="text-center text-gray-700 mt-6">
