@@ -4,11 +4,35 @@ import allFoods from "../../data/foodData";
 import RelatedFood from "./RelatedFood";
 import Loading from "../general/Loading";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
+import useCart from "../../hooks/useCart";
 
 function FoodDetail() {
-  const {user,loading} = useAuth();
+  const { user, loading } = useAuth();
   const { id } = useParams();
   const [foodItem, setFoodItem] = useState(null);
+
+  const toastValue = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
+  const { cartData, setCartData, addToCart, removeFromCart } = useCart();
+
+  const handleAddToCart = (event) => {
+    event.preventDefault();
+    const isProductInCart = cartData.some((item) => item.id === foodItem.id);
+    if (isProductInCart) {
+      toast.error("Product already in cart!", toastValue);
+    } else {
+      addToCart(foodItem);
+      toast.success("Added to cart successfully!", toastValue);
+    }
+  };
 
   useEffect(() => {
     const particularFoodItem = allFoods.find(
@@ -18,7 +42,7 @@ function FoodDetail() {
   }, [id]);
 
   if (!foodItem || loading) {
-    return <Loading/> // Or a more sophisticated loading indicator
+    return <Loading />; // Or a more sophisticated loading indicator
   }
 
   return (
@@ -71,35 +95,6 @@ function FoodDetail() {
                     </div>
                   </div>
 
-                  {/* add to favourite button */}
-
-                  {/* <button className="group transition-all duration-500 p-0.5">
-                    <svg
-                      width={60}
-                      height={60}
-                      viewBox="0 0 60 60"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle
-                        className="fill-indigo-50 transition-all duration-500 group-hover:fill-indigo-100"
-                        cx={30}
-                        cy={30}
-                        r={30}
-                        fill=""
-                      />
-                      <path
-                        className="stroke-indigo-600 transition-all duration-500 group-hover:stroke-indigo-700"
-                        d="M21.4709 31.3196L30.0282 39.7501L38.96 30.9506M30.0035 22.0789C32.4787 19.6404 36.5008 19.6404 38.976 22.0789C41.4512 24.5254 41.4512 28.4799 38.9842 30.9265M29.9956 22.0789C27.5205 19.6404 23.4983 19.6404 21.0231 22.0789C18.548 24.5174 18.548 28.4799 21.0231 30.9184M21.0231 30.9184L21.0441 30.939M21.0231 30.9184L21.4628 31.3115"
-                        stroke=""
-                        strokeWidth="1.6"
-                        strokeMiterlimit={10}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button> */}
-                  {/* add to favourite button */}
                 </div>
                 {/* pricing and ratings */}
                 <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-2 gap-y-3">
@@ -116,7 +111,7 @@ function FoodDetail() {
                 </div>
                 {/* pricing and ratings */}
                 {/* buy now button */}
-                <button className="text-center mt-3 w-full px-3 py-2 rounded-lg bg-[#6ea963] flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-200 hover:bg-[#7ceb69] hover:shadow-indigo-300">
+                <button onClick={handleAddToCart} className="text-center mt-3 w-full px-3 py-2 rounded-lg bg-[#6ea963] flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-200 hover:bg-[#7ceb69] hover:shadow-indigo-300">
                   Add To Cart
                 </button>
               </div>

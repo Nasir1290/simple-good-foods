@@ -25,7 +25,6 @@ const FoodCard = ({ foodItem }) => {
       toast.success("Added to cart successfully!", toastValue);
     }
   };
-  console.log(cartData);
 
   return (
     <div className="w-[354px] bg-[#f7f7f7] p-2 flex flex-col justify-center mt-4 rounded-md shadow-lg border">
@@ -53,7 +52,7 @@ const FoodCard = ({ foodItem }) => {
           </div>
         </Link>
         <button
-          className="bg-[#6ea963] hover:bg-[#4fff30] transition-all text-white py-2 text-center rounded-lg font-semibold mt-3"
+          className="bg-[#6ea963] hover:bg-[#5aec40] transition-all text-white py-2 text-center rounded-lg font-semibold mt-3"
           onClick={handleAddToCart}
         >
           Add To Cart

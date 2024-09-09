@@ -1,6 +1,7 @@
 import React from "react";
 import SubHeroSectionImage from "../../assets/subHeroImage.png";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const SubHeroSection = () => {
   return (
@@ -14,9 +15,11 @@ const SubHeroSection = () => {
             <p className=" text-small">
               Ingredients are naturally rich and full of taste
             </p>
-            <button className=" flex justify-center items-center gap-2 px-3 py-2 bg-[#6ea963] md:mt-8 mt-4 rounded-lg">
-              Meal Plans <MdOutlineArrowOutward className=" inline" />{" "}
-            </button>
+            <Link to="/mealplans">
+              <button className=" flex justify-center items-center gap-2 px-3 py-2 bg-[#6ea963] transition-all hover:bg-[#7be768] md:mt-8 mt-4 rounded-lg">
+                Meal Plans <MdOutlineArrowOutward className=" inline" />{" "}
+              </button>
+            </Link>
           </div>
         </div>
       </div>
