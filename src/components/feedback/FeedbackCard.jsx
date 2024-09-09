@@ -1,13 +1,12 @@
 import React from "react";
-import FeedbackImage from "../../assets/feedback-image.png";
 
-const FeedbackCard = () => {
+const FeedbackCard = ({image}) => {
   return (
     <div className=" bg-[#f7f7f7] border-medium rounded-md flex-col md:flex md:flex-row md:gap-4 px-3 py-2 justify-center m-1 md:m-0 items-center md:w-[600px]">
       <div className=" flex justify-center items-center">
         <img
-          className=" h-32 md:h-52 w-32 md:w-52 rounded-full object-contain"
-          src={FeedbackImage}
+          className=" h-32 md:h-32 w-32 md:w-32 rounded-full object-contain"
+          src={image}
           alt="feed-back"
         />
       </div>

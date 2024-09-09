@@ -14,8 +14,10 @@ const SignUp = () => {
     email: "",
     password: "",
     rememberMe: false,
+    profileImage:"",
   };
 
+  
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
 

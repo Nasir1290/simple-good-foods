@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import FeedbackCard from "./FeedbackCard";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
+import Testimonial1 from "../../assets/testimonial1.png";
+import Testimonial2 from "../../assets/testimonial2.png";
+import Testimonial3 from "../../assets/testimonial3.png";
+import Testimonial4 from "../../assets/feedback-image.png";
 
 const FeedbackList = () => {
   const scrollRef = useRef(null); // Ref for the scrollable div
@@ -32,10 +36,10 @@ const FeedbackList = () => {
         ref={scrollRef}
         className="grid grid-flow-row justify-center md:justify-start md:grid-flow-col overflow-x-scroll gap-4 scroll-smooth"
       >
-        <FeedbackCard />
-        <FeedbackCard />
-        <FeedbackCard />
-        <FeedbackCard />
+        <FeedbackCard image={Testimonial4} />
+        <FeedbackCard image={Testimonial2} />
+        <FeedbackCard image={Testimonial1} />
+        <FeedbackCard image={Testimonial3} />
       </div>
 
       {/* Right Arrow (hidden on small screens) */}

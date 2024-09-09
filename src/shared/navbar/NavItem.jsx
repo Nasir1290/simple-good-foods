@@ -27,7 +27,7 @@ export default function NavItem() {
           <Link
             color="foreground"
             onClick={() => handleNavigation(nav.path)}
-            className={` cursor-pointer font-semibold text-md ${
+            className={` cursor-pointer font-semibold text-md text-[#656565] ${
               location.pathname === nav.path ? "text-primary" : ""
             }`}
           >
@@ -39,16 +39,3 @@ export default function NavItem() {
   );
 }
 
-// <div className="flex flex-wrap gap-4 font-semibold">
-//   <Tabs color="primary" variant={"underlined"} aria-label="Tabs variants">
-//     <Tab key="home" title="Home" />
-
-//       <Tab onClick={handleNavigate} key="ourmenus" title="Our menus" />
-
-//     <Tab key="meal-plans" title="Meal plans" />
-//     <Tab key="catering" title="Catering" />
-//     <Tab key="how-it-work" title="How it work" />
-//     <Tab key="testimonial" title="Testimonial" />
-//     <Tab key="faq" title="FAQ" />
-//   </Tabs>
-// </div>

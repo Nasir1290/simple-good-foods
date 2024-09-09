@@ -6,11 +6,6 @@ import {
   NavbarContent,
   NavbarMenuToggle,
   NavbarMenu,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  Avatar,
   Image,
 } from "@nextui-org/react";
 // import { SearchIcon } from "./SearchIcons.jsx";
@@ -25,6 +20,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function NavbarPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { auth, setAuth } = useAuth();
+  const firstLetter = auth?.username?.charAt(0);
   const navigate = useNavigate();
 
   const handleLogoutClick = (event) => {
@@ -77,27 +73,21 @@ export default function NavbarPage() {
             </button>
 
             {/* Avatar Dropdown added here */}
-            <Dropdown placement="bottom-end">
-              {/* avatar */}
-              <DropdownTrigger>
-                <Avatar
-                  isBordered
-                  as="button"
-                  className="transition-transform h-8 rounded-full"
-                  color="secondary"
-                  name={auth?.username}
-                  size="sm"
-                  src=""
+            <Link to="/user-profile"
+            className=" border-3 border-blue-600 rounded-full"
+            >
+              {auth?.userImage ? (
+                <img
+                  className="h-8 w-8 rounded-full object-cover overflow-hidden"
+                  src={auth?.userImage}
+                  alt={auth.username}
                 />
-              </DropdownTrigger>
-              {/* user profile dropdown */}
-              <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-semibold">Signed in as</p>
-                  <p className="font-semibold">{auth?.email}</p>
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+              ) : (
+                <div className="flex items-center justify-center bg-gray-400 h-8 w-8 rounded-full text-white text-xl font-semibold uppercase">
+                  {firstLetter}
+                </div>
+              )}
+            </Link>
           </>
         ) : (
           <>

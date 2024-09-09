@@ -11,6 +11,7 @@ import CateringPage from "../pages/CateringPage";
 import HowItWorks from "../pages/HowItWorks";
 import Testimonials from "../pages/Testimonials";
 import Faq from "../components/home/Faq";
+import UserProfile from "../components/user/UserProfile";
 
 const routes = Router([
   {
@@ -48,6 +49,10 @@ const routes = Router([
       {
         path: "/faq",
         element: <Faq />,
+      },
+      {
+        path: "/user-profile",
+        element: <UserProfile />,
       },
     ],
   },

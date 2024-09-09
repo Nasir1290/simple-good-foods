@@ -24,7 +24,6 @@ const Login = () => {
     draggable: true,
     progress: undefined, // Hides the progress bar
   };
-  console.log(auth);
   const navigate = useNavigate();
 
   // Handle input change
