@@ -5,7 +5,6 @@ import ManageTestimonials from "./ManageTestimonials";
 import TransactionImage from "../../assets/transaction.png";
 import ManageMenuImage from "../../assets/manage-menu.png";
 import ManageTestimonialImage from "../../assets/manate-testimonial.png";
-import Testimonials from "../../pages/Testimonials";
 import { BiMessageSquareDetail } from "react-icons/bi";
 
 function Dashboard() {
@@ -27,11 +26,13 @@ function Dashboard() {
   return (
     <div className="flex flex-col lg:flex-row h-screen">
       {/* Left-side menu */}
-      <div className="bg-white lg:w-[22%] font-bold  w-full lg:border-r border-gray-300 p-4 flex lg:flex-col justify-around lg:justify-start fixed lg:static bottom-0 lg:bottom-auto">
+      <div className="md:bg-white md:text-black text-white bg-slate-500 lg:w-[22%] font-bold w-full lg:border-r border-gray-300 py-1 px-3 flex lg:flex-col justify-around lg:justify-start fixed lg:static bottom-0 lg:bottom-auto">
         <div
-          className={`cursor-pointer mb-2 text-center lg:text-left ${
-            activeMenu === "transactions" ? "text-blue-500" : ""
-          } lg:text-base text-sm  py-2 px-1 lg:py-0 bg-blue-100 lg:bg-transparent rounded lg:rounded-none`}
+          className={`cursor-pointer text-center lg:text-left ${
+            activeMenu === "transactions"
+              ? "bg-blue-500 text-white"
+              : "md:text-black"
+          } lg:text-base text-sm py-2 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
           onClick={() => setActiveMenu("transactions")}
         >
           <img
@@ -42,9 +43,11 @@ function Dashboard() {
           Transactions
         </div>
         <div
-          className={`cursor-pointer mb-2  text-center lg:text-left ${
-            activeMenu === "manage-menu" ? "text-blue-500" : ""
-          } lg:text-base text-sm py-2 px-1 lg:py-0 bg-blue-100 lg:bg-transparent rounded lg:rounded-none`}
+          className={`cursor-pointer text-center lg:text-left ${
+            activeMenu === "manage-menu"
+              ? "bg-blue-500 text-white"
+              : "md:text-black"
+          } lg:text-base text-sm py-2 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
           onClick={() => setActiveMenu("manage-menu")}
         >
           <img
@@ -55,9 +58,11 @@ function Dashboard() {
           Manage Menu
         </div>
         <div
-          className={`cursor-pointer mb-2  text-center lg:text-left ${
-            activeMenu === "manage-testimonials" ? "text-blue-500" : ""
-          } lg:text-base text-sm py-2 px-1 lg:py-0 bg-blue-100 lg:bg-transparent rounded lg:rounded-none`}
+          className={`cursor-pointer text-center lg:text-left ${
+            activeMenu === "manage-testimonials"
+              ? "bg-blue-500 text-white"
+              : "md:text-black"
+          } lg:text-base text-sm py-2 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
           onClick={() => setActiveMenu("manage-testimonials")}
         >
           <BiMessageSquareDetail className="hidden md:inline-flex mr-2 h-5 w-5 text-[#515050]" />
@@ -66,7 +71,9 @@ function Dashboard() {
       </div>
 
       {/* Right-side content */}
-      <div className="md:w-full w-full ml-auto overflow-auto md:p-4 p-1">{renderContent()}</div>
+      <div className="md:w-full ml-auto overflow-auto md:p-4 p-2">
+        {renderContent()}
+      </div>
     </div>
   );
 }
