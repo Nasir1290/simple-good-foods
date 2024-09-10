@@ -65,8 +65,15 @@ const CartDetails = () => {
                   <h2 className="text-lg font-semibold text-blue-600">
                     {product.title}
                   </h2>
-                  <p className="text-gray-600">Rating: {product.rating} ★</p>
-                  <p className="text-gray-500">${product.price.toFixed(2)}</p>
+                  <p className="text-gray-600">
+                    Rating:{" "}
+                    <span className=" text-yellow-600 font-bold">
+                      ★ {product.rating}&nbsp;/&nbsp;5
+                    </span>
+                  </p>
+                  <p className="text-gray-500">
+                    Price:<span className=" font-bold text-green-500">&nbsp;${product.price.toFixed(2)}</span>
+                  </p>
                 </div>
 
                 {/* Remove Button */}
