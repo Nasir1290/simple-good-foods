@@ -73,7 +73,7 @@ const HeroSection = () => {
       data-aos="fade-up" // AOS animation type
     >
       {/* text content div */}
-      <div className="flex flex-col justify-center md:items-start items-center mb-12 md:mb-0">
+      <div className="flex flex-col justify-center hover:-rotate-3 md:items-start items-center mb-12 md:mb-0">
         <div
           className="text-3xl font-semibold md:text-4xl lg:text-5xl md:font-bold"
           data-aos="fade-right" // AOS animation for text

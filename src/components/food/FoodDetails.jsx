@@ -6,6 +6,8 @@ import Loading from "../general/Loading";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import useCart from "../../hooks/useCart";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function FoodDetail() {
   const { user, loading } = useAuth();
@@ -40,14 +42,21 @@ function FoodDetail() {
     setFoodItem(particularFoodItem);
   }, [id]);
 
+  useEffect(() => {
+    AOS.init({ duration: 2000 }); // Initialize AOS
+  }, []);
+
+
   if (!foodItem || loading) {
     return <Loading />; // Or a more sophisticated loading indicator
   }
 
   return (
     <>
-      <section className="pt-4 pb-8">
-        <h1 className=" text-center text-3xl font-bold mb-3 md:mb-6 ">Food Details</h1>
+      <section data-aos="fade-in" className="pt-4 pb-8">
+        <h1 className=" text-center text-3xl font-bold mb-3 md:mb-6 ">
+          Food Details
+        </h1>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="slider-box w-full h-full max-lg:mx-auto mx-0">
@@ -94,7 +103,6 @@ function FoodDetail() {
                       <span>{foodItem?.element?.[2]}</span>
                     </div>
                   </div>
-
                 </div>
                 {/* pricing and ratings */}
                 <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-2 gap-y-3">
@@ -111,7 +119,10 @@ function FoodDetail() {
                 </div>
                 {/* pricing and ratings */}
                 {/* buy now button */}
-                <button onClick={handleAddToCart} className="text-center mt-3 w-full px-3 py-2 rounded-lg bg-[#6ea963] flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-200 hover:bg-[#7ceb69] hover:shadow-indigo-300">
+                <button
+                  onClick={handleAddToCart}
+                  className="text-center mt-3 w-full px-3 py-2 rounded-lg bg-[#6ea963] flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-200 hover:bg-[#7ceb69] hover:shadow-indigo-300"
+                >
                   Add To Cart
                 </button>
               </div>
