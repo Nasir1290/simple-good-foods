@@ -25,7 +25,7 @@ const Footer = () => {
             </Link>
 
             {/* Navigation Links */}
-            <div className="grid grid-cols-2 gap-2 md:gap-x-36 text-center md:text-left">
+            <div className="grid grid-cols-2 gap-8 md:gap-x-36 text-start md:text-left">
               <Link to="/" className="hover:text-[#6ea963] transition-colors">
                 Home
               </Link>

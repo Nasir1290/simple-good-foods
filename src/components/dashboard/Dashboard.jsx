@@ -1,0 +1,74 @@
+import React, { useState } from "react";
+import Transactions from "./Transactions";
+import ManageMenu from "./ManageMenu";
+import ManageTestimonials from "./ManageTestimonials";
+import TransactionImage from "../../assets/transaction.png";
+import ManageMenuImage from "../../assets/manage-menu.png";
+import ManageTestimonialImage from "../../assets/manate-testimonial.png";
+import Testimonials from "../../pages/Testimonials";
+import { BiMessageSquareDetail } from "react-icons/bi";
+
+function Dashboard() {
+  const [activeMenu, setActiveMenu] = useState("transactions");
+
+  const renderContent = () => {
+    switch (activeMenu) {
+      case "transactions":
+        return <Transactions />;
+      case "manage-menu":
+        return <ManageMenu />;
+      case "manage-testimonials":
+        return <ManageTestimonials />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="flex flex-col lg:flex-row h-screen">
+      {/* Left-side menu */}
+      <div className="bg-white lg:w-[22%] font-bold  w-full lg:border-r border-gray-300 p-4 flex lg:flex-col justify-around lg:justify-start fixed lg:static bottom-0 lg:bottom-auto">
+        <div
+          className={`cursor-pointer mb-2 text-center lg:text-left ${
+            activeMenu === "transactions" ? "text-blue-500" : ""
+          } lg:text-base text-sm  py-2 px-1 lg:py-0 bg-blue-100 lg:bg-transparent rounded lg:rounded-none`}
+          onClick={() => setActiveMenu("transactions")}
+        >
+          <img
+            className="hidden md:inline-flex mr-2 h-5 w-5"
+            src={TransactionImage}
+            alt=""
+          />
+          Transactions
+        </div>
+        <div
+          className={`cursor-pointer mb-2  text-center lg:text-left ${
+            activeMenu === "manage-menu" ? "text-blue-500" : ""
+          } lg:text-base text-sm py-2 px-1 lg:py-0 bg-blue-100 lg:bg-transparent rounded lg:rounded-none`}
+          onClick={() => setActiveMenu("manage-menu")}
+        >
+          <img
+            className="hidden md:inline-flex mr-2 h-5 w-5"
+            src={ManageMenuImage}
+            alt=""
+          />
+          Manage Menu
+        </div>
+        <div
+          className={`cursor-pointer mb-2  text-center lg:text-left ${
+            activeMenu === "manage-testimonials" ? "text-blue-500" : ""
+          } lg:text-base text-sm py-2 px-1 lg:py-0 bg-blue-100 lg:bg-transparent rounded lg:rounded-none`}
+          onClick={() => setActiveMenu("manage-testimonials")}
+        >
+          <BiMessageSquareDetail className="hidden md:inline-flex mr-2 h-5 w-5 text-[#515050]" />
+          Manage Testimonials
+        </div>
+      </div>
+
+      {/* Right-side content */}
+      <div className="md:w-full w-full ml-auto overflow-auto md:p-4 p-1">{renderContent()}</div>
+    </div>
+  );
+}
+
+export default Dashboard;

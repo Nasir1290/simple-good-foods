@@ -14,6 +14,7 @@ import Faq from "../components/home/Faq";
 import UserProfile from "../components/user/UserProfile";
 import CartDetails from "../pages/CartDetails";
 import ProtectedRoute from "./ProtectedRoute";
+import Dashboard from "../components/dashboard/Dashboard";
 
 const routes = Router([
   {
@@ -60,6 +61,11 @@ const routes = Router([
       {
         path: "/cart-details",
         element: <ProtectedRoute element={<CartDetails/>} />,
+      },
+      {
+        path: "/dashboard",
+        // element:<Dashboard/> ,
+        element: <ProtectedRoute element={<Dashboard/>} />,
       },
     ],
   },

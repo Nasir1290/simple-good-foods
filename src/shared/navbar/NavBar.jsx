@@ -1,5 +1,6 @@
+
+
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -8,14 +9,14 @@ import {
   NavbarMenu,
   Image,
 } from "@nextui-org/react";
-// import { SearchIcon } from "./SearchIcons.jsx";
 import LogoImage from "../../assets/logo.png";
 import NavItem from "./NavItem.jsx";
 import NavbarMenuItems from "./NavbarMenuItems.jsx";
 import { TiShoppingCart } from "react-icons/ti";
 import { IoIosLogOut } from "react-icons/io";
+import { RxDashboard } from "react-icons/rx";
 import useAuth from "../../hooks/useAuth.js";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../components/firebase/firebaseConfig.js";
 import Loading from "../../components/general/Loading.jsx";
@@ -25,9 +26,9 @@ import { toast } from "react-toastify";
 export default function NavbarPage() {
   const { user, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const firstLetter = user?.displayName.charAt(0);
   const auth = getAuth(app);
-  const { cartData, setCartData, addToCart, removeFromCart } = useCart();
+  const { cartData } = useCart();
+  const firstLetter = user?.displayName?.charAt(0);
 
   const toastValue = {
     position: "top-right",
@@ -37,11 +38,11 @@ export default function NavbarPage() {
     draggable: true,
     progress: undefined,
   };
+
   const handleLogoutClick = async (event) => {
     event.preventDefault();
 
     try {
-      // Perform Firebase signOut
       await signOut(auth);
       toast.warn("Logged out successfully", toastValue);
     } catch (error) {
@@ -55,7 +56,7 @@ export default function NavbarPage() {
 
   return (
     <Navbar
-      className=" shadow py-2"
+      className="shadow py-2"
       onMenuOpenChange={setIsMenuOpen}
       shouldHideOnScroll
     >
@@ -64,51 +65,42 @@ export default function NavbarPage() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        {/* company logo */}
         <NavbarBrand>
           <Link to="/">
             <Image
-              className=" w-12 h-12 md:w-20 md:h-20 rounded-full cursor-pointer"
+              className="w-12 h-12 md:w-20 md:h-20 rounded-full cursor-pointer"
               src={LogoImage}
+              alt="Logo"
             />
           </Link>
         </NavbarBrand>
-
-        {/* <h4 className=" mx-2 font-bold">Shop</h4> */}
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {/* navigation items menu */}
+      <NavbarContent className="hidden sm:flex gap-4 justify-center">
         <NavItem />
-        {/* navigation items menu */}
       </NavbarContent>
 
-      <NavbarContent justify="end" className=" items-center">
-        {/* Search Input added here */}
-
+      <NavbarContent justify="end" className="flex items-center gap-4">
         {user?.email ? (
           <>
-            {/* logout button */}
             <button
-              className=" font-bold text-2xl bg-red-400 text-white px-2 py-1 rounded-md"
+              className="text-2xl bg-red-500 text-white px-2 py-1 rounded-md"
               onClick={handleLogoutClick}
             >
               <IoIosLogOut />
             </button>
-
-            {/* Avatar Dropdown added here */}
             <Link
               to="/user-profile"
-              className=" border-3 border-blue-600 rounded-full"
+              className="border-2 border-blue-600 rounded-full"
             >
               {user?.photoURL ? (
                 <img
-                  className="h-8 w-8 rounded-full object-cover overflow-hidden"
-                  src={user?.photoURL}
-                  alt={user?.displayName}
+                  className="h-8 w-8 rounded-full object-cover"
+                  src={user.photoURL}
+                  alt={user.displayName}
                 />
               ) : (
-                <div className="flex items-center justify-center bg-gray-400 h-8 w-8 rounded-full text-white text-xl font-semibold uppercase">
+                <div className="flex items-center justify-center bg-gray-400 h-8 w-8 rounded-full text-white text-xl uppercase">
                   {firstLetter}
                 </div>
               )}
@@ -116,33 +108,33 @@ export default function NavbarPage() {
           </>
         ) : (
           <>
-            {/* signup login and logout button */}
             <Link to="/login">
-              <button className="px-4 py-2 bg-[#6ea963] text-white text-small rounded-md text-center">
+              <button className="px-4 py-2 bg-green-600 text-white rounded-md">
                 Login
               </button>
             </Link>
             <Link to="/signup">
-              <button className="px-2 py-2 text-[#6ea963] border-1 text-small border-[#6ea963] rounded-md text-center">
+              <button className="px-4 py-2 border border-green-600 text-green-600 rounded-md">
                 Signup
               </button>
             </Link>
           </>
         )}
-        {/* shoping cart */}
-        <Link to="/cart-details">
-          <div className="relative border-2 cursor-pointer border-blue-500 h-9 w-9 rounded-full text-indigo-400 font-bold flex items-center justify-center">
-            <TiShoppingCart className="font-bold h-6 w-6" />
-            {cartData.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                {cartData.length}
-              </span>
-            )}
-          </div>
+
+        <Link to="/cart-details" className="relative flex items-center">
+          <TiShoppingCart className="h-6 w-6 text-indigo-400" />
+          {cartData.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {cartData.length}
+            </span>
+          )}
+        </Link>
+
+        <Link to="/dashboard" className="relative flex items-center">
+          <RxDashboard className="h-6 w-6 text-indigo-400" />
         </Link>
       </NavbarContent>
 
-      {/* Menu item for mobile user */}
       <NavbarMenu>
         <NavbarMenuItems />
       </NavbarMenu>

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { FaEdit } from "react-icons/fa"; // For the edit icon
+import { FaEdit, FaRegEdit } from "react-icons/fa"; // For the edit icon
 import useAuth from "../../hooks/useAuth";
 import Loading from "../general/Loading";
+import ManageMenu from "../dashboard/ManageMenu";
+import { MdDeleteSweep } from "react-icons/md";
 
 const UserProfile = () => {
   const { user, loading } = useAuth();
@@ -105,45 +107,172 @@ const UserProfile = () => {
   );
 
   // Render Order History Table
-  const renderOrderHistory = () => (
-    <div className="mt-4">
-      <h2 className="text-xl font-semibold mb-4">Order History</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-4 py-2">Ordered Meal</th>
-              <th className="px-4 py-2">Order Date</th>
-              <th className="px-4 py-2">Delivery Date</th>
-              <th className="px-4 py-2">Price</th>
-              <th className="px-4 py-2">Status</th>
+  const renderOrderHistory = () => {
+    const menuData = [
+      {
+        id: 1,
+        image: "/food.jpg",
+        menuName: "Pasta",
+        ourMenu: "Breakfast",
+        mealPlan: "Medium Meal",
+        img: "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 2,
+        image: "/food.jpg",
+        menuName: "Salad",
+        ourMenu: "Snacks",
+        mealPlan: "Small Paleo Meal",
+        img: "https://plus.unsplash.com/premium_photo-1675252369719-dd52bc69c3df?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 3,
+        image: "/food.jpg",
+        menuName: "Pizza",
+        ourMenu: "Lunch",
+        mealPlan: "Large Meal",
+        img: "https://images.unsplash.com/photo-1432457990754-c8b5f21448de?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
+      },
+      {
+        id: 4,
+        image: "/food.jpg",
+        menuName: "Burger",
+        ourMenu: "Dinner",
+        mealPlan: "Small Meal",
+        img: "https://images.unsplash.com/photo-1481931715705-36f5f79f1f3d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 5,
+        image: "/food.jpg",
+        menuName: "Soup",
+        ourMenu: "Snacks",
+        mealPlan: "Medium Meal",
+        img: "https://plus.unsplash.com/premium_photo-1670601440146-3b33dfcd7e17?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
+      },
+      {
+        id: 1,
+        image: "/food.jpg",
+        menuName: "Pasta",
+        ourMenu: "Breakfast",
+        mealPlan: "Medium Meal",
+        img: "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 2,
+        image: "/food.jpg",
+        menuName: "Salad",
+        ourMenu: "Snacks",
+        mealPlan: "Small Paleo Meal",
+        img: "https://plus.unsplash.com/premium_photo-1675252369719-dd52bc69c3df?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 3,
+        image: "/food.jpg",
+        menuName: "Pizza",
+        ourMenu: "Lunch",
+        mealPlan: "Large Meal",
+        img: "https://images.unsplash.com/photo-1432457990754-c8b5f21448de?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
+      },
+      {
+        id: 4,
+        image: "/food.jpg",
+        menuName: "Burger",
+        ourMenu: "Dinner",
+        mealPlan: "Small Meal",
+        img: "https://images.unsplash.com/photo-1481931715705-36f5f79f1f3d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 5,
+        image: "/food.jpg",
+        menuName: "Soup",
+        ourMenu: "Snacks",
+        mealPlan: "Medium Meal",
+        img: "https://plus.unsplash.com/premium_photo-1670601440146-3b33dfcd7e17?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
+      },
+      {
+        id: 1,
+        image: "/food.jpg",
+        menuName: "Pasta",
+        ourMenu: "Breakfast",
+        mealPlan: "Medium Meal",
+        img: "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 2,
+        image: "/food.jpg",
+        menuName: "Salad",
+        ourMenu: "Snacks",
+        mealPlan: "Small Paleo Meal",
+        img: "https://plus.unsplash.com/premium_photo-1675252369719-dd52bc69c3df?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 3,
+        image: "/food.jpg",
+        menuName: "Pizza",
+        ourMenu: "Lunch",
+        mealPlan: "Large Meal",
+        img: "https://images.unsplash.com/photo-1432457990754-c8b5f21448de?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
+      },
+      {
+        id: 4,
+        image: "/food.jpg",
+        menuName: "Burger",
+        ourMenu: "Dinner",
+        mealPlan: "Small Meal",
+        img: "https://images.unsplash.com/photo-1481931715705-36f5f79f1f3d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
+      },
+      {
+        id: 5,
+        image: "/food.jpg",
+        menuName: "Soup",
+        ourMenu: "Snacks",
+        mealPlan: "Medium Meal",
+        img: "https://plus.unsplash.com/premium_photo-1670601440146-3b33dfcd7e17?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
+      },
+    ];
+
+    return (
+      <div className=" mt-4">
+        <table className="w-full border-collapse table-auto text-center text-small md:font-bold ">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border p-2">ID</th>
+              <th className="border p-2">Image</th>
+              <th className="border p-2">Menu Name</th>
+              <th className="border p-2">Our Menu</th>
+              <th className="border p-2">Meal Plan</th>
+              <th className="border p-2">Action</th>
             </tr>
           </thead>
           <tbody>
-            {dummyuser.orders.map((order, index) => (
-              <tr key={index} className="bg-white border-b hover:bg-gray-50">
-                <td className="px-4 py-2">{order.meal}</td>
-                <td className="px-4 py-2">{order.orderDate}</td>
-                <td className="px-4 py-2">{order.deliveryDate}</td>
-                <td className="px-4 py-2">{order.price}</td>
-                <td className="px-4 py-2">
-                  <span
-                    className={`${
-                      order.status === "Delivered"
-                        ? "text-green-500"
-                        : "text-yellow-500"
-                    } font-semibold`}
-                  >
-                    {order.status}
-                  </span>
+            {menuData.map((menu) => (
+              <tr key={menu.id} className="border-t">
+                <td className="border p-2">{menu.id}</td>
+                <td className="border p-2 text-start">
+                  <img
+                    src={menu.img}
+                    alt="menu"
+                    className="inline-block w-8 h-8 rounded-full object-cover"
+                  />
+                </td>
+                <td className="border p-2">{menu.menuName}</td>
+                <td className="border p-2">{menu.ourMenu}</td>
+                <td className="border p-2">{menu.mealPlan}</td>
+                <td className="border p-2 ">
+                  <button className="text-blue-500 bg-gray-300 ml-2 px-3 py-1 text-center rounded-md">
+                    <FaRegEdit />
+                  </button>
+                  <button className="text-red-500 ml-2 bg-gray-300 px-3 py-1 text-center rounded-md">
+                    <MdDeleteSweep />
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </div>
-  );
+    );
+  }
 
   if (loading) {
     return <Loading/>;
