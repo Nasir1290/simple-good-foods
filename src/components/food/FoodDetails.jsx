@@ -46,7 +46,8 @@ function FoodDetail() {
 
   return (
     <>
-      <section className="py-8">
+      <section className="pt-4 pb-8">
+        <h1 className=" text-center text-3xl font-bold mb-3 md:mb-6 ">Food Details</h1>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="slider-box w-full h-full max-lg:mx-auto mx-0">
@@ -59,7 +60,7 @@ function FoodDetail() {
                       <img
                         src={foodItem.image}
                         alt="food image"
-                        className="max-lg:mx-auto rounded-[5rem] border-8 border-gray-200 w-[27rem] h-[20rem] sm:w-[40rem] sm:h-[27rem] object-cover"
+                        className="max-lg:mx-auto rounded-[5rem] border-8 border-gray-200 w-full mx-1 h-[20rem] sm:w-[40rem] sm:h-[27rem] object-cover"
                       />
                     </div>
                   </div>
