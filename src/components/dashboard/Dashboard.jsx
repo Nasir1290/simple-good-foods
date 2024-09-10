@@ -119,7 +119,7 @@ function Dashboard() {
       <div className="md:bg-white md:text-black text-white bg-slate-500 lg:w-[26%] font-bold w-full lg:border-r border-gray-300 py-1 md:p-1 px-3 flex lg:flex-col justify-around lg:justify-start fixed lg:static bottom-0 lg:bottom-auto">
         {/* Transactions */}
         <div
-          className={`cursor-pointer text-center lg:text-left ${
+          className={`cursor-pointer md:mb-2 text-center lg:text-left ${
             activeMenu === "transactions"
               ? "bg-blue-500 text-white"
               : "bg-gray-200 text-gray-700"
@@ -136,7 +136,7 @@ function Dashboard() {
 
         {/* Manage Menu */}
         <div
-          className={`cursor-pointer text-center lg:text-left ${
+          className={`cursor-pointer text-center md:mb-2 lg:text-left ${
             activeMenu === "manage-menu"
               ? "bg-blue-500 text-white"
               : "bg-gray-200 text-gray-700"
@@ -153,7 +153,7 @@ function Dashboard() {
 
         {/* Manage Testimonials */}
         <div
-          className={`cursor-pointer text-center lg:text-left ${
+          className={`cursor-pointer text-center md:mb-2 lg:text-left ${
             activeMenu === "manage-testimonials"
               ? "bg-blue-500 text-white"
               : "bg-gray-200 text-gray-700"
