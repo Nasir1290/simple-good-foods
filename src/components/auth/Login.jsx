@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginBgImage from "../../assets/singin-bg.png"; // Replace with your actual image later
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -6,6 +6,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FcGoogle } from "react-icons/fc";
 import NavbarForLoginAndSignup from "../../shared/navbar/NavbarForLoginAndSignUp";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+
 
 const Login = () => {
   // Form state
@@ -76,8 +80,11 @@ const Login = () => {
     }
   };
 
+    useEffect(() => {
+      AOS.init({ duration: 1000 }); // Initialize AOS
+    }, []);
   return (
-    <div>
+    <div data-aos="fade-out">
       <NavbarForLoginAndSignup />
       <div
         className="flex items-center justify-center min-h-screen bg-cover bg-center relative"

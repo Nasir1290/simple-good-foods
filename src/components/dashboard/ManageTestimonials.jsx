@@ -1,7 +1,9 @@
 // ManageTestimonials.js
-import React from "react";
+import React, { useEffect } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteSweep } from "react-icons/md";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function ManageTestimonials() {
   const testimonialsData = [
@@ -77,6 +79,9 @@ function ManageTestimonials() {
     },
   ];
 
+    useEffect(() => {
+      AOS.init({ duration: 1000 }); // Initialize AOS
+    }, []);
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -87,7 +92,7 @@ function ManageTestimonials() {
           className="border p-2 rounded w-1/3"
         />
       </div>
-      <table className="w-full border-collapse table-auto text-small md:font-bold text-center">
+      <table data-aos="fade-up" className="w-full border-collapse table-auto text-small md:font-bold text-center">
         <thead>
           <tr className="bg-gray-200">
             <th className="border p-2">ID</th>

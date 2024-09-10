@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEdit, FaRegEdit } from "react-icons/fa"; // For the edit icon
 import useAuth from "../../hooks/useAuth";
 import Loading from "../general/Loading";
 import ManageMenu from "../dashboard/ManageMenu";
 import { MdDeleteSweep } from "react-icons/md";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const UserProfile = () => {
   const { user, loading } = useAuth();
@@ -36,10 +38,13 @@ const UserProfile = () => {
   };
 
   const [activeSection, setActiveSection] = useState("orderHistory");
+   useEffect(() => {
+     AOS.init({ duration: 1000 });
+   }, []);
 
   // Render Edit Profile Form
   const renderEditProfile = () => (
-    <div className="mt-4">
+    <div className="mt-4" data-aos="fade-ease-in">
       <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
       <form className="space-y-4">
         <div>
@@ -75,7 +80,7 @@ const UserProfile = () => {
 
   // Render Change Password Form
   const renderChangePassword = () => (
-    <div className="mt-4">
+    <div className="mt-4" data-aos="fade-in">
       <h2 className="text-xl font-semibold mb-4">Change Password</h2>
       <form className="space-y-4">
         <div>
@@ -232,7 +237,7 @@ const UserProfile = () => {
     ];
 
     return (
-      <div className=" mt-4">
+      <div className=" mt-4" data-aos="left">
         <table className="w-full border-collapse table-auto text-center text-small md:font-bold ">
           <thead>
             <tr className="bg-gray-200">
@@ -283,7 +288,7 @@ const UserProfile = () => {
       {/* User Info Section */}
       <div className="flex flex-col items-center justify-center gap-4">
         {/* User Image with Edit Icon */}
-        <div className="relative">
+        <div className="relative" data-aos="fade-in">
           {user?.photoURL ? (
             <img
               className="h-32 w-32 md:h-52 md:w-52 rounded-full border-3 object-cover overflow-hidden"

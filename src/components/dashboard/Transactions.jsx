@@ -1,5 +1,7 @@
 // Transactions.js
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Transactions() {
   const transactionsData = [
@@ -155,6 +157,10 @@ function Transactions() {
     },
   ];
 
+
+    useEffect(() => {
+      AOS.init({ duration: 2000 }); // Initialize AOS
+    }, []);
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -165,7 +171,10 @@ function Transactions() {
           className="border p-2 rounded w-1/3"
         />
       </div>
-      <table className="w-full border-collapse text-small md:font-bold text-center">
+      <table
+        data-aos="fade-out"
+        className="w-full border-collapse text-small md:font-bold text-center"
+      >
         <thead>
           <tr className="bg-gray-200">
             <th className="border p-1 md:p-2">ID</th>
