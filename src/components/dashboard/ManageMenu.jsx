@@ -90,46 +90,7 @@ function ManageMenu() {
       mealPlan: "Medium Meal",
       img: "https://plus.unsplash.com/premium_photo-1670601440146-3b33dfcd7e17?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
     },
-    {
-      id: 1,
-      image: "/food.jpg",
-      menuName: "Pasta",
-      ourMenu: "Breakfast",
-      mealPlan: "Medium Meal",
-      img: "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGZvb2R8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 2,
-      image: "/food.jpg",
-      menuName: "Salad",
-      ourMenu: "Snacks",
-      mealPlan: "Small Paleo Meal",
-      img: "https://plus.unsplash.com/premium_photo-1675252369719-dd52bc69c3df?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGZvb2R8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 3,
-      image: "/food.jpg",
-      menuName: "Pizza",
-      ourMenu: "Lunch",
-      mealPlan: "Large Meal",
-      img: "https://images.unsplash.com/photo-1432457990754-c8b5f21448de?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
-      id: 4,
-      image: "/food.jpg",
-      menuName: "Burger",
-      ourMenu: "Dinner",
-      mealPlan: "Small Meal",
-      img: "https://images.unsplash.com/photo-1481931715705-36f5f79f1f3d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 5,
-      image: "/food.jpg",
-      menuName: "Soup",
-      ourMenu: "Snacks",
-      mealPlan: "Medium Meal",
-      img: "https://plus.unsplash.com/premium_photo-1670601440146-3b33dfcd7e17?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D",
-    },
+    
   ];
 
   useEffect(() => {

@@ -42,41 +42,8 @@ function ManageTestimonials() {
       date: "2024-09-12",
       img: "https://plus.unsplash.com/premium_photo-1669882305273-674eff6567af?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHVzZXJ8ZW58MHx8MHx8fDA%3D",
     },
-    {
-      id: "1",
-      user: "John Doe",
-      feedback: "Great service!",
-      date: "2024-09-01",
-      img: "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
-      id: "2",
-      user: "Jane Smith",
-      feedback: "Amazing experience!",
-      date: "2024-09-05",
-      img: "https://plus.unsplash.com/premium_photo-1664541336896-b3d5f7dec9a3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
-      id: "3",
-      user: "Michael Johnson",
-      feedback: "Loved the food!",
-      date: "2024-09-07",
-      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
-      id: "4",
-      user: "Emily Davis",
-      feedback: "Highly recommended!",
-      date: "2024-09-10",
-      img: "https://images.unsplash.com/photo-1640951613773-54706e06851d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHVzZXJ8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: "5",
-      user: "Chris Wilson",
-      feedback: "Great customer service!",
-      date: "2024-09-12",
-      img: "https://plus.unsplash.com/premium_photo-1669882305273-674eff6567af?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHVzZXJ8ZW58MHx8MHx8fDA%3D",
-    },
+    
+     
   ];
 
     useEffect(() => {
