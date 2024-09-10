@@ -73,7 +73,7 @@ const HeroSection = () => {
       data-aos="fade-up" // AOS animation type
     >
       {/* text content div */}
-      <div className="flex flex-col justify-center hover:-rotate-3 md:items-start items-center mb-12 md:mb-0">
+      <div className="flex flex-col justify-center hover:-rotate-3 duration-500 md:items-start items-center mb-12 md:mb-0">
         <div
           className="text-3xl font-semibold md:text-4xl lg:text-5xl md:font-bold"
           data-aos="fade-right" // AOS animation for text
@@ -99,7 +99,7 @@ const HeroSection = () => {
       </div>
       {/* image content div */}
       <div className="flex justify-center items-center" data-aos="zoom-in">
-        <div className="border-[1.5rem] md:border-[2rem] p-5 md:p-8 border-[#6ea963] rounded-full hover:scale-105 hover:rotate-180 transition-transform duration-300 ease-in-out shadow-lg hover:shadow-2xl">
+        <div className="border-[1.5rem] md:border-[2rem] p-5 md:p-8 border-[#6ea963] rounded-full hover:scale-105 hover:hue-rotate-180 hover:rotate-180 duration-700 transition-transform ease-in-out shadow-lg hover:shadow-2xl">
           <img
             className="w-48 md:w-52 lg:w-60 h-48 md:h-52 lg:h-60"
             src={HeroImage}
