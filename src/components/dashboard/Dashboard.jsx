@@ -26,13 +26,13 @@ function Dashboard() {
   return (
     <div className="flex flex-col lg:flex-row h-screen">
       {/* Left-side menu */}
-      <div className="md:bg-white md:text-black text-white bg-slate-500 lg:w-[22%] font-bold w-full lg:border-r border-gray-300 py-1 px-3 flex lg:flex-col justify-around lg:justify-start fixed lg:static bottom-0 lg:bottom-auto">
+      <div className="md:bg-white md:text-black text-white bg-slate-500 lg:w-[26%] font-bold w-full lg:border-r border-gray-300 py-1 md:p-1 px-3 flex lg:flex-col justify-around lg:justify-start fixed lg:static bottom-0 lg:bottom-auto">
         <div
           className={`cursor-pointer text-center lg:text-left ${
             activeMenu === "transactions"
               ? "bg-blue-500 text-white"
               : "md:text-black"
-          } lg:text-base text-sm py-2 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
+          } lg:text-base text-sm py-2 md:px-1 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
           onClick={() => setActiveMenu("transactions")}
         >
           <img
@@ -47,7 +47,7 @@ function Dashboard() {
             activeMenu === "manage-menu"
               ? "bg-blue-500 text-white"
               : "md:text-black"
-          } lg:text-base text-sm py-2 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
+          } lg:text-base text-sm py-2 md:p-1 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
           onClick={() => setActiveMenu("manage-menu")}
         >
           <img
@@ -62,7 +62,7 @@ function Dashboard() {
             activeMenu === "manage-testimonials"
               ? "bg-blue-500 text-white"
               : "md:text-black"
-          } lg:text-base text-sm py-2 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
+          } lg:text-base text-sm py-2 md:p-1 px-3 lg:py-0 bg-blue-100 text-[#79c41e] lg:bg-transparent rounded lg:rounded-none`}
           onClick={() => setActiveMenu("manage-testimonials")}
         >
           <BiMessageSquareDetail className="hidden md:inline-flex mr-2 h-5 w-5 text-[#515050]" />
