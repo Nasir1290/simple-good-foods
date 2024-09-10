@@ -99,7 +99,7 @@ const HeroSection = () => {
       </div>
       {/* image content div */}
       <div className="flex justify-center items-center" data-aos="zoom-in">
-        <div className="border-[1.5rem] md:border-[2rem] p-5 md:p-8 border-[#6ea963] rounded-full hover:scale-105 transition-transform duration-300 ease-in-out shadow-lg hover:shadow-2xl">
+        <div className="border-[1.5rem] md:border-[2rem] p-5 md:p-8 border-[#6ea963] rounded-full hover:scale-105 hover:rotate-180 transition-transform duration-300 ease-in-out shadow-lg hover:shadow-2xl">
           <img
             className="w-48 md:w-52 lg:w-60 h-48 md:h-52 lg:h-60"
             src={HeroImage}
