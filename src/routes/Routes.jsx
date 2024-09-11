@@ -20,7 +20,7 @@ const routes = Router([
   {
     path: "/",
     element: <App />,
-    errorElement:<NotFound/>,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -56,16 +56,16 @@ const routes = Router([
       },
       {
         path: "/user-profile",
-        element: <UserProfile />,
+        element: <ProtectedRoute element={<UserProfile />} />,
       },
       {
         path: "/cart-details",
-        element: <ProtectedRoute element={<CartDetails/>} />,
+        element: <ProtectedRoute element={<CartDetails />} />,
       },
       {
         path: "/dashboard",
         // element:<Dashboard/> ,
-        element: <ProtectedRoute element={<Dashboard/>} />,
+        element: <ProtectedRoute element={<Dashboard />} />,
       },
     ],
   },
